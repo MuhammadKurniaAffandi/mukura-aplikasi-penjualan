@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import FirebaseProvider from './components/FirebaseProvider';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './pages/login';
+import LupaPassword from './pages/lupa-password';
+import NotFound from './pages/not-found';
+import Private from './pages/private';
+import Registrasi from './pages/registrasi/index';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FirebaseProvider>
+      <Router>
+        <Switch>
+          <PrivateRoute path='/' component={Private} exact />
+          <PrivateRoute path='/pengaturan' component={Private} />
+          <PrivateRoute path='/produk' component={Private} />
+          <PrivateRoute path='/transaksi' component={Private} />
+          <Route path='/registrasi' component={Registrasi} />
+          <Route path='/login' component={Login} />
+          <Route path='/lupa-password' component={LupaPassword} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    </FirebaseProvider>
   );
 }
 
