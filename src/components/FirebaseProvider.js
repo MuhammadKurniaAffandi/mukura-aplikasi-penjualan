@@ -10,12 +10,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 const FirebaseContext = createContext();
 
+const app = initializeApp(firebaseConfig);
+
 export function useFirebase() {
   return useContext(FirebaseContext);
 }
 
 function FirebaseProvider(props) {
-  const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const firestore = getFirestore(app);
   const storage = getStorage(app);

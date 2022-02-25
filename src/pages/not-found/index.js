@@ -1,10 +1,25 @@
 import React from 'react';
 
+// import material ui
+import { Container, Paper, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+
+// styles
+import useStyles from './styles';
+
 function NotFound() {
+  const classes = useStyles();
+
   return (
-    <div>
-      <h1>Halaman Not Found</h1>
-    </div>
+    <Container maxWidth='xs'>
+      <Paper className={classes.paper}>
+        <Typography variant='subtitle1'>Halaman Tidak Ditemukan</Typography>
+        <Typography variant='h3'>404</Typography>
+        <Typography component={Link} to='/'>
+          Kembali ke Beranda
+        </Typography>
+      </Paper>
+    </Container>
   );
 }
 
