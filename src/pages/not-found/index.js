@@ -1,9 +1,7 @@
 import React from 'react';
-
 // import material ui
 import { Container, Paper, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
 // styles
 import useStyles from './styles';
 

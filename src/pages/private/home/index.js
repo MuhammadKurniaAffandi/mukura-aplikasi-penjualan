@@ -1,6 +1,7 @@
 import React from 'react';
-
+// material ui
 import { Button } from '@material-ui/core';
+// firebase hooks
 import { useFirebase } from '../../../components/FirebaseProvider';
 
 function Home() {

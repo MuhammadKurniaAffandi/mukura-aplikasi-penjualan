@@ -15,16 +15,12 @@ import {
 
 // import useStyles
 import useStyles from './styles';
-
 /* import react router */
 import { Link, Redirect } from 'react-router-dom';
-
 // import untuk validator
 import isEmail from 'validator/lib/isEmail';
-
 // firebase hook
 import { useFirebase } from '../../components/FirebaseProvider';
-
 // component AppLoading
 import AppLoading from '../../components/AppLoading';
 
@@ -59,34 +55,28 @@ function Login(props) {
 
   // state untuk loading
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   // firebase hook
   const { user, loading } = useFirebase();
-
   // untuk untuk validasi
   const validate = () => {
     // buat variabel untuk menampung error
     const newError = { ...error };
-
     // validasi untuk email
     if (!form.email) {
       newError.email = 'Email wajib diisi';
     } else if (!isEmail(form.email)) {
       newError.email = 'Email tidak valid';
     }
-
     // Validasi untuk password
     if (!form.password) {
       newError.password = 'Password wajib diisi';
     }
-
     return newError;
   };
 
   // fungsi untuk handle submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // mencari error jika ada
     const findErrors = validate();
     if (Object.values(findErrors).some((err) => err !== '')) {
@@ -102,22 +92,18 @@ function Login(props) {
           case 'auth/user-not-found':
             newError.email = 'Email tidak terdaftar';
             break;
-
           // email sudah tidak valid
           case 'auth/invalid-email':
             newError.email = 'Email tidak valid';
             break;
-
           // untuk password lemah
           case 'auth/wrong-password':
             newError.password = 'Password Salah';
             break;
-
           // untuk metode email dan password yang tidak didukung
           case 'auth/user-disabled':
             newError.email = 'Pengguna diblokir';
             break;
-
           default:
             newError.email = 'Terjadi kesalahan, silahkan coba lagi';
             break;

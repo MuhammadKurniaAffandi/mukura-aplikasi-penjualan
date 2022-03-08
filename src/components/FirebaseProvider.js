@@ -19,7 +19,7 @@ export function useFirebase() {
 function FirebaseProvider(props) {
   const auth = getAuth(app);
   const firestore = getFirestore(app);
-  const storage = getStorage(app);
+  const storage = getStorage();
 
   const [user, loading, error] = useAuthState(auth);
 

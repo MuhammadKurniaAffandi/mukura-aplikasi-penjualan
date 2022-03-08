@@ -32,8 +32,6 @@ function Pengguna() {
   const passwordRef = useRef();
   const saveDisplayName = async (e) => {
     const displayName = displayNameRef.current.value;
-    console.log(displayName);
-
     if (!displayName) {
       setError({
         displayName: 'Nama wajib diisi',
@@ -53,6 +51,7 @@ function Pengguna() {
 
   const updateEmaill = async (e) => {
     const email = emailRef.current.value;
+    // validasi email
     if (!email) {
       setError({
         email: 'Email wajib diisi',
@@ -72,19 +71,20 @@ function Pengguna() {
       } catch (error) {
         let emailError = '';
         switch (error.code) {
+          // validasi jika email sudah digunakan
           case 'auth/email-already-in-use':
             emailError = 'Email sudah digunakan oleh pengguna lain';
             break;
-
+          // validasi jika email tidak valid
           case 'auth/invalid-email':
             emailError = 'Email tidak valid';
             break;
-
+          // memberi arahkan kepada pengguna untuk login kembali
           case 'auth/requires-recent-login':
             emailError =
               'Silahkan logout kemudian login kembali untuk memperbarui email';
             break;
-
+          // validasi jika semua data email salah
           default:
             emailError = 'Terjadi kesalahan, silahkan coba lagi';
             break;
@@ -127,14 +127,16 @@ function Pengguna() {
       } catch (error) {
         let errorPassword = '';
         switch (error.code) {
+          // validasi jika password lemah
           case 'auth/weak-password':
             errorPassword = 'Password terlalu lemah';
             break;
+          // memberi arahkan kepada pengguna untuk login kembali
           case 'auth/requires-recent-login':
             errorPassword =
               'Silahkan logout kemudian login kembali untuk memperbarui Password';
             break;
-
+          // validasi jika masukan password semua salah
           default:
             errorPassword = 'Terjadi kesalahan, silahkan coba lagi';
             break;

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
 // import firebase
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
-
 // import komponent material-ui
 import {
   Button,
@@ -12,45 +10,35 @@ import {
   TextField,
   Grid,
 } from '@material-ui/core';
-
 // import useStyles
 import useStyles from './styles';
-
 /* import react router */
 import { Link, Redirect } from 'react-router-dom';
-
 // import untuk validator
 import isEmail from 'validator/lib/isEmail';
-
 // firebase hook
 import { useFirebase } from '../../components/FirebaseProvider';
-
 // component AppLoading
 import AppLoading from '../../components/AppLoading';
-
 // notistack hook
 import { useSnackbar } from 'notistack';
 
 function LupaPassword() {
   const classes = useStyles();
-
   // state untuk data form
   const [form, setFrom] = useState({
     email: '',
   });
-
   // state untuk data error form
   const [error, setError] = useState({
     email: '',
   });
-
   // fungsi untuk onChange
   const handleChange = (e) => {
     setFrom({
       ...form,
       [e.target.name]: e.target.value,
     });
-
     setError({
       ...error,
       [e.target.name]: '',
@@ -59,31 +47,26 @@ function LupaPassword() {
 
   // state untuk loading
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   // firebase hook
   const { user, loading } = useFirebase();
   // nutistack hook
   const { enqueueSnackbar } = useSnackbar();
-
   // untuk untuk validasi
   const validate = () => {
     // buat variabel untuk menampung error
     const newError = { ...error };
-
     // validasi untuk email
     if (!form.email) {
       newError.email = 'Email wajib diisi';
     } else if (!isEmail(form.email)) {
       newError.email = 'Email tidak valid';
     }
-
     return newError;
   };
 
   // fungsi untuk handle submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // mencari error jika ada
     const findErrors = validate();
     if (Object.values(findErrors).some((err) => err !== '')) {
@@ -109,12 +92,10 @@ function LupaPassword() {
           case 'auth/user-not-found':
             newError.email = 'Email tidak ditemukan';
             break;
-
           // email sudah tidak valid
           case 'auth/invalid-email':
             newError.email = 'Email tidak valid';
             break;
-
           default:
             newError.email = 'Terjadi kesalahan, silahkan coba lagi';
             break;

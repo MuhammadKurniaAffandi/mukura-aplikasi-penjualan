@@ -3,10 +3,8 @@ import React from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
-
 // react-router-dom
 import { Switch, Route, Redirect } from 'react-router-dom';
-
 // komponent halaman pengguna
 import Pengguna from './pengguna';
 import Toko from './toko';
